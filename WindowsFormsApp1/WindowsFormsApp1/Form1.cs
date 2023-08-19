@@ -68,7 +68,30 @@ namespace WindowsFormsApp1
                 listViewBlacklist.Items.Add(processName);
             }
         }
+        private void buttonBrowseApp_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.Filter = "Исполняемые файлы|*.exe|Все файлы|*.*";
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    string selectedAppPath = openFileDialog.FileName;
+                    string selectedAppName = Path.GetFileNameWithoutExtension(selectedAppPath);
 
+                    if (!string.IsNullOrEmpty(selectedAppName))
+                    {
+                        if (selectedAppName == "WindowsFormsApp1")
+                            return;
+                        if (!forbiddenProcesses.Contains(selectedAppName))
+                        {
+                            forbiddenProcesses.Add(selectedAppName);
+                            SaveBlacklist();
+                            UpdateListView();
+                        }
+                    }
+                }
+            }
+        }
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             string processName = textBoxProcessName.Text.Trim();
@@ -117,8 +140,13 @@ namespace WindowsFormsApp1
                 {
                     try
                     {
-                        process.Kill();
-                        textBoxLog.AppendText($"Закрыт запрещенный процесс: {process.ProcessName}\r\n");
+                        int timeLimitMinutes = (int)numericUpDownTimeLimit.Value;
+
+                        if (ProcessRunningTimeExceedsLimit(process, timeLimitMinutes))
+                        {
+                            process.Kill();
+                            textBoxLog.AppendText($"Закрыт запрещенный процесс: {process.ProcessName} (превышено время работы)\r\n");
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -126,6 +154,12 @@ namespace WindowsFormsApp1
                     }
                 }
             }
+        }
+
+        private bool ProcessRunningTimeExceedsLimit(Process process, int timeLimitMinutes)
+        {
+            TimeSpan processRunningTime = DateTime.Now - process.StartTime;
+            return processRunningTime.TotalMinutes > timeLimitMinutes;
         }
     }
 }

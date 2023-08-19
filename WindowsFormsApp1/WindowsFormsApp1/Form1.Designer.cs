@@ -37,6 +37,10 @@
             this.textBoxLog = new System.Windows.Forms.TextBox();
             this.buttonStartMonitoring = new System.Windows.Forms.Button();
             this.buttonStopMonitoring = new System.Windows.Forms.Button();
+            this.buttonBrowseApp = new System.Windows.Forms.Button();
+            this.numericUpDownTimeLimit = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTimeLimit)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonAdd
@@ -85,6 +89,7 @@
             this.textBoxLog.Location = new System.Drawing.Point(204, 172);
             this.textBoxLog.Multiline = true;
             this.textBoxLog.Name = "textBoxLog";
+            this.textBoxLog.ReadOnly = true;
             this.textBoxLog.Size = new System.Drawing.Size(584, 266);
             this.textBoxLog.TabIndex = 4;
             // 
@@ -108,11 +113,40 @@
             this.buttonStopMonitoring.UseVisualStyleBackColor = true;
             this.buttonStopMonitoring.Click += new System.EventHandler(this.buttonStopMonitoring_Click);
             // 
+            // buttonBrowseApp
+            // 
+            this.buttonBrowseApp.Location = new System.Drawing.Point(100, 12);
+            this.buttonBrowseApp.Name = "buttonBrowseApp";
+            this.buttonBrowseApp.Size = new System.Drawing.Size(75, 23);
+            this.buttonBrowseApp.TabIndex = 7;
+            this.buttonBrowseApp.Text = "Select";
+            this.buttonBrowseApp.UseVisualStyleBackColor = true;
+            this.buttonBrowseApp.Click += new System.EventHandler(this.buttonBrowseApp_Click);
+            // 
+            // numericUpDownTimeLimit
+            // 
+            this.numericUpDownTimeLimit.Location = new System.Drawing.Point(12, 89);
+            this.numericUpDownTimeLimit.Name = "numericUpDownTimeLimit";
+            this.numericUpDownTimeLimit.Size = new System.Drawing.Size(162, 20);
+            this.numericUpDownTimeLimit.TabIndex = 8;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(13, 68);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(116, 13);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "time of life process(min)";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.numericUpDownTimeLimit);
+            this.Controls.Add(this.buttonBrowseApp);
             this.Controls.Add(this.buttonStopMonitoring);
             this.Controls.Add(this.buttonStartMonitoring);
             this.Controls.Add(this.textBoxLog);
@@ -122,6 +156,7 @@
             this.Controls.Add(this.buttonAdd);
             this.Name = "Form1";
             this.Text = "Form1";
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownTimeLimit)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -137,6 +172,9 @@
         private System.Windows.Forms.TextBox textBoxLog;
         private System.Windows.Forms.Button buttonStartMonitoring;
         private System.Windows.Forms.Button buttonStopMonitoring;
+        private System.Windows.Forms.Button buttonBrowseApp;
+        private System.Windows.Forms.NumericUpDown numericUpDownTimeLimit;
+        private System.Windows.Forms.Label label1;
     }
 }
 
